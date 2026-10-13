@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orelake: send raw data, ask anything</title>
+<meta name="description" content="Orelake is a data platform in early development. Send raw data; it builds the tables and rollups from how the data is used, and answers questions in one place.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23123a3f'/%3E%3Cpath d='M6 21c4-3 6 3 10 0s6 3 10 0' fill='none' stroke='%23e8b04a' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='11' r='3.2' fill='%23e8b04a'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f7f5f0; --ink: #16282b; --muted: #55686b; --line: #d9d5ca;
+    --card: #ffffff; --accent: #0f5c63; --ore: #b9791a; --code: #eef0ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1a1c; --ink: #e9eeec; --muted: #9bb0b2; --line: #24383b;
+      --card: #142427; --accent: #6fc7cf; --ore: #e8b04a; --code: #1a2e31;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+  .brand svg { width: 30px; height: 30px; }
+  .status { font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+  .hero { padding: 72px 0 40px; }
+  h1 { font-size: clamp(36px, 7vw, 60px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 20px; }
+  h1 span { color: var(--ore); }
+  .lede { font-size: 20px; color: var(--muted); max-width: 640px; margin: 0; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 56px 0 18px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; letter-spacing: -0.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .num { color: var(--ore); font-weight: 700; font-size: 14px; }
+  ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
+  ul.plain li { margin: 6px 0; }
+  ul.plain strong { color: var(--ink); font-weight: 600; }
+  .stack { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stack span { background: var(--code); border-radius: 6px; padding: 4px 10px; font-size: 14px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  a { color: var(--accent); }
+  footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#123a3f"/><path d="M6 21c4-3 6 3 10 0s6 3 10 0" fill="none" stroke="#e8b04a" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="11" r="3.2" fill="#e8b04a"/></svg>
+      Orelake
+    </div>
+    <div class="status">In development · October 2026</div>
+  </header>
+
+  <section class="hero">
+    <h1>Send raw data.<br><span>Ask anything.</span></h1>
+    <p class="lede">Orelake is a data platform for teams that have data but no data team. You send records as they are. Orelake works out the schema, builds and maintains the tables and rollups from how the data is actually used, and answers questions in one place.</p>
+  </section>
+
+  <h2>How it is meant to work</h2>
+  <div class="grid">
+    <div class="card"><div class="num">1</div><h3>Send</h3><p>Push raw events and records over a Kafka-compatible endpoint or in files. No schema design up front.</p></div>
+    <div class="card"><div class="num">2</div><h3>Shape</h3><p>Agents infer schemas, write open Apache Iceberg tables, and build rollups from real query patterns, with guardrails on every change.</p></div>
+    <div class="card"><div class="num">3</div><h3>Ask</h3><p>Query in SQL or plain language and get tables, charts and written answers. Reports and sharing come from the same place.</p></div>
+  </div>
+
+  <h2>What we are building on</h2>
+  <div class="stack">
+    <span>Rust</span><span>Apache Arrow</span><span>Apache DataFusion</span><span>Apache Iceberg</span><span>Parquet</span><span>S3-compatible storage</span><span>Kafka protocol</span>
+  </div>
+  <p style="color:var(--muted);max-width:640px">Open formats throughout: your data stays in Iceberg tables you can read with other engines.</p>
+
+  <h2>Where we are</h2>
+  <ul class="plain">
+    <li><strong>Now:</strong> foundation work. Build and test tooling, a local stack, a first write-and-query path through Iceberg, and benchmark and correctness harnesses.</li>
+    <li><strong>Next:</strong> ingest, ask and guardrails: the first version someone outside the team can try.</li>
+    <li><strong>Not yet:</strong> there is no product to sign up for today. This page will say so when there is.</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>Questions or interest in early access: <a href="mailto:hello@orelake.com">hello@orelake.com</a></p>
+
+  <footer>
+    <span>© 2026 Orelake</span>
+    <span>Apache, Arrow, DataFusion, Iceberg, Parquet and Kafka are trademarks of the Apache Software Foundation.</span>
+  </footer>
+</div>
+</body>
+</html>
